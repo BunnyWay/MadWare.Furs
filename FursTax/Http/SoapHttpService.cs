@@ -1,5 +1,6 @@
 ﻿using MadWare.Furs.Requests;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -33,7 +34,7 @@ namespace MadWare.Furs.Http
             using (HttpClient client = new HttpClient(handler))
             {
                 client.DefaultRequestHeaders.Add("SOAPAction", b.GetSOAPAction());
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("text/xml"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
                 client.Timeout = TimeSpan.FromSeconds(this.timeout);
 
                 var cnt = new StringContent(payload, Encoding.UTF8, "text/xml");
