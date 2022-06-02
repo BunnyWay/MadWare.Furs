@@ -41,14 +41,13 @@ namespace MadWare.Furs.Encryption
             byte[] pubKey = this.cert.GetPublicKey();
             string pubKeyBase64 = Convert.ToBase64String(pubKey);
 
-            var rsa = this.cert.GetRSAPrivateKey();
+            RSACryptoServiceProvider rsaCSP = (RSACryptoServiceProvider)this.cert.PrivateKey;
+            CspParameters cspParams = new CspParameters();
+            cspParams.KeyContainerName = rsaCSP.CspKeyContainerInfo.KeyContainerName;
+            cspParams.KeyNumber = rsaCSP.CspKeyContainerInfo.KeyNumber == KeyNumber.Exchange ? 1 : 2;
+            RSACryptoServiceProvider rsaAesCSP = new RSACryptoServiceProvider(cspParams);
 
-            //CspParameters cspParams = new CspParameters();
-            //cspParams.KeyContainerName = rsaCSP.CspKeyContainerInfo.KeyContainerName;
-            //cspParams.KeyNumber = rsaCSP.CspKeyContainerInfo.KeyNumber == KeyNumber.Exchange ? 1 : 2;
-            //RSACryptoServiceProvider rsaAesCSP = new RSACryptoServiceProvider(cspParams);
-
-            xmlSig.SigningKey = rsa;
+            xmlSig.SigningKey = rsaAesCSP;
 
             KeyInfo keyInfo = new KeyInfo();
             KeyInfoX509Data keyInfoData = new KeyInfoX509Data();

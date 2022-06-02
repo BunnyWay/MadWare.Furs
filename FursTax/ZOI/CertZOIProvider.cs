@@ -42,17 +42,13 @@ namespace MadWare.Furs.ZOI
 
             byte[] bytes = Encoding.ASCII.GetBytes(data);
 
-            var rsa = this.cert.GetRSAPrivateKey();
+            RSACryptoServiceProvider rsaCSP = (RSACryptoServiceProvider)this.cert.PrivateKey;
+            CspParameters cspParameters = new CspParameters();
+            cspParameters.KeyContainerName = rsaCSP.CspKeyContainerInfo.KeyContainerName;
+            cspParameters.KeyNumber = rsaCSP.CspKeyContainerInfo.KeyNumber == KeyNumber.Exchange ? 1 : 2;
 
-            //RSACryptoServiceProvider rsaCsp = rsa as RSACryptoServiceProvider;
-
-            //CspParameters cspParameters = new CspParameters();
-            //cspParameters.KeyContainerName = rsaCsp.CspKeyContainerInfo.KeyContainerName;
-            //cspParameters.KeyNumber = rsaCsp.CspKeyContainerInfo.KeyNumber == KeyNumber.Exchange ? 1 : 2;
-
-            //RSACryptoServiceProvider rsaAesCSP = new RSACryptoServiceProvider(cspParameters);
-            //byte[] signature = rsaAesCSP.SignData(bytes, CryptoConfig.MapNameToOID("SHA256"));
-            byte[] signature = rsa.SignData(bytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            RSACryptoServiceProvider rsaAesCSP = new RSACryptoServiceProvider(cspParameters);
+            byte[] signature = rsaAesCSP.SignData(bytes, CryptoConfig.MapNameToOID("SHA256"));
 
             string zoi = GetMD5Hash(signature);
 
