@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\FursTax\\FursTax.csproj": {}
+    "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\ClassLibrary1\\ClassLibrary1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\FursTax\\FursTax.csproj": {
+    "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\ClassLibrary1\\ClassLibrary1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\FursTax\\FursTax.csproj",
-        "projectName": "FursTax",
-        "projectPath": "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\FursTax\\FursTax.csproj",
+        "projectUniqueName": "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\ClassLibrary1\\ClassLibrary1.csproj",
+        "projectName": "ClassLibrary1",
+        "projectPath": "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\ClassLibrary1\\ClassLibrary1.csproj",
         "packagesPath": "C:\\Users\\uross\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\FursTax\\obj\\",
+        "outputPath": "C:\\Users\\uross\\source\\repos\\MadWare.Furs\\ClassLibrary1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -42,16 +42,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.Build.Tasks.Core": {
-              "target": "Package",
-              "version": "[17.2.0, )"
-            },
-            "System.Security.Cryptography.Algorithms": {
-              "target": "Package",
-              "version": "[4.3.1, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
