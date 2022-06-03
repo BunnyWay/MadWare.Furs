@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Security;
+using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -30,6 +31,7 @@ namespace MadWare.Furs.Http
         {
             var handler = new HttpClientHandler();
             handler.ClientCertificates.Add(this.cert);
+            handler.SslProtocols = SslProtocols.Tls13;
 
             using (HttpClient client = new HttpClient(handler))
             {
