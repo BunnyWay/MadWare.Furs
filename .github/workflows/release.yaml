@@ -1,0 +1,33 @@
+name: 'Release Madware.Furs'
+on:
+  release:
+    types: [published]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate release name
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          echo "BUILD_VERSION=${REF_NAME//v/}" >> $GITHUB_ENV
+          echo "publish_filename=madware-furs-$REF_NAME.zip" >> $GITHUB_ENV
+
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+          source-url: https://nuget.pkg.github.com/BunnyWay/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.BUNNYNET_DEVOPS_PAT }}
+      - name: build
+        run: dotnet build -c Release
+
+      - name: test
+        run: dotnet test -c Release --no-build --no-restore
+        
+      - name: Pack Madware.Furs
+        run: dotnet pack -c Release --no-build --no-restore FursTax/FursTax.csproj
+        
+      - name: Publish NuGet package
+        run: dotnet nuget push FursTax/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source "https://nuget.pkg.github.com/BunnyWay/index.json"
