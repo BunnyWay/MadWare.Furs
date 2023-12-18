@@ -31,7 +31,6 @@ namespace MadWare.Furs.Http
         {
             var handler = new HttpClientHandler();
             handler.ClientCertificates.Add(this.cert);
-            handler.SslProtocols = SslProtocols.Tls13;
 
             using (HttpClient client = new HttpClient(handler))
             {
