@@ -126,7 +126,7 @@ namespace MadWare.Furs.UnitTest
                             ElectronicDeviceID = "SRV1",
                             InvoiceNumber = 1
                         },
-                        InvoiceAmount = 60.011M,
+                        InvoiceAmount = 60.01M,
                         PaymentAmount = 80.00M,
                         TaxesPerSeller = new List<Models.Invoice.TaxesPerSeller>
                         {
